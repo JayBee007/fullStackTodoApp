@@ -30,6 +30,6 @@ app.listen(process.env.PORT,process.env.IP,() => {
    console.log(`Server started on port ${process.env.PORT} and host ${process.env.IP}`); 
 });
 
-// app.listen(process.env.IP, () => {
-//   console.log(`Server started on port ${process.env.IP}`); 
-// });
+module.exports = {
+   app
+};
