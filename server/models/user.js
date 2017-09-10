@@ -1,8 +1,9 @@
-var mongoose = require("mongoose");
-var validator = require("validator");
-var _ = require("lodash");
-var jwt = require("jsonwebtoken");
-var Schema = mongoose.Schema;
+var mongoose =      require("mongoose");
+var validator =     require("validator");
+var _ =             require("lodash");
+var bcrypt =        require("bcryptjs");
+var jwt =           require("jsonwebtoken");
+var Schema =        mongoose.Schema;
 
 var UserSchema = new Schema({
     email: {
@@ -67,8 +68,39 @@ UserSchema.statics.findByToken = function(token) {
         '_id': decoded._id,
         'tokens.token': token,
         'tokens.access': 'auth'
-    })
-}
+    });
+};
+
+// bcrypt.genSalt(10, function(err, salt) {
+//     bcrypt.hash("B4c0/\/", salt, function(err, hash) {
+//         // Store hash in your password DB. 
+//     });
+// });
+
+UserSchema.pre('save',function(next) {
+   var user = this;
+   
+   if(user.isModified('password')) {
+       
+       bcrypt.genSalt(10, function(err,salt) {
+          
+          if(err) {console.log(err)}
+          
+          bcrypt.hash(user.password,salt,function(err,hash) {
+             
+            if(err) {console.log(err)}
+            user.password = hash;
+            next();
+          });
+       });
+       
+   } else {
+       next();
+   }
+   
+   
+   
+});
 
 var User = mongoose.model("User", UserSchema);
 

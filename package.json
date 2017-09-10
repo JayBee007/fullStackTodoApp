@@ -15,6 +15,7 @@
   "author": "Javed",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.0",
