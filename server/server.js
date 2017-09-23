@@ -39,14 +39,17 @@ app.get('/todos', authenticate, (req,res) => {
       });
 });
 
-app.get('/todos/:id',(req,res) => {
+app.get('/todos/:id', authenticate, (req,res) => {
    var id = req.params.id;
    
    if(!mongoose.Types.ObjectId.isValid(id)) {
       res.status(404).send();
       res.end();
    }
-   Todo.findById(id).then((todo) => {
+   Todo.findOne({
+      _id:id,
+      _creator: req.user._id
+   }).then((todo) => {
       if(!todo) {
          res.status(404).send();
          res.end();
@@ -59,7 +62,7 @@ app.get('/todos/:id',(req,res) => {
    }); 
 });
 
-app.delete('/todos/:id',(req,res) => {
+app.delete('/todos/:id', authenticate, (req,res) => {
    var id = req.params.id;
    
    if(!mongoose.Types.ObjectId.isValid(id)) {
@@ -67,7 +70,11 @@ app.delete('/todos/:id',(req,res) => {
       res.end();
    }
    
-   Todo.findByIdAndRemove({_id:id}).then((todo) => {
+   Todo.findOneAndRemove({
+      _id:id,
+      _creator: req.user._id
+      
+   }).then((todo) => {
       if(!todo) {
          res.status(404).send();
          res.end();
@@ -80,7 +87,7 @@ app.delete('/todos/:id',(req,res) => {
    
 });
 
-app.patch('/todos/:id', (req,res) => {
+app.patch('/todos/:id', authenticate, (req,res) => {
    var id = req.params.id;
    var body = _.pick(req.body, ['text', 'completed']);
    
@@ -96,7 +103,10 @@ app.patch('/todos/:id', (req,res) => {
       body.completedAt = null;
    }
    
-   Todo.findByIdAndUpdate(id, {$set:body}, {new: true})
+   Todo.findOneAndUpdate({
+      _id:id,
+      _creator: req.user._id
+   }, {$set:body}, {new: true})
       .then((todo) => {
          if(!todo) {
             res.status(404).send();
