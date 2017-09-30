@@ -12,9 +12,23 @@ const todos = (state = [], action) => {
   }
 }
 
+const auth = (state=false,action) => {
+  switch (action.type) {
+    case C.AUTHENTICATED:
+      return {...state, auth:true};
+    case C.UNAUTHENTICATED:
+      return {...state, auth:false};
+    case C.AUTHENTICATION_ERROR:
+      return {...state, error:action.payload}
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   form: formReducer,
-  todos
+  todos,
+  auth
 });
 
 export default rootReducer;

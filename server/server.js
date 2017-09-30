@@ -173,7 +173,7 @@ app.delete('/users/me/token', authenticate, (req,res) => {
 
 
 app.listen(PORT,HOST,() => {
-   console.log(`Server started on port ${PORT} and host ${IP}`);
+   console.log(`Server started on port ${PORT} and host ${HOST}`);
 });
 
 module.exports = {

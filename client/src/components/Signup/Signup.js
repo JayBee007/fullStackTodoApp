@@ -1,9 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
+import {signUpAction} from '../../redux/actions';
 import SignupForm from './SignupForm';
 
 class Signup extends React.Component {
   submit = (values) => {
-    console.log(values);
+    this.props.signUpAction(values,this.props.history);
   }
 
   render() {
@@ -13,4 +16,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default connect(null,{signUpAction})(Signup);
