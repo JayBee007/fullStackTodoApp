@@ -1,9 +1,16 @@
 import React from 'react';
+import SignupForm from './SignupForm';
 
-function Signup() {
-  return (
-    <h1>Signup</h1>
-  )
+class Signup extends React.Component {
+  submit = (values) => {
+    console.log(values);
+  }
+
+  render() {
+    return (
+      <SignupForm onSubmit={this.submit} />
+    )
+  }
 }
 
 export default Signup;
