@@ -1,5 +1,6 @@
 require("./config/config");
 var express = require("express");
+var path = require("path");
 var bodyParser = require("body-parser");
 var _ = require("lodash");
 
@@ -15,9 +16,11 @@ var app = express();
 
 app.use(bodyParser.json());
 
-app.get('/', (req,res) => {
-   res.send("hello world");
-});
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// app.get('/', (req,res) => {
+//    res.send("hello world");
+// });
 
 app.post('/todos', authenticate, (req,res) => {
    var todo = new Todo({
@@ -167,6 +170,10 @@ app.delete('/users/me/token', authenticate, (req,res) => {
       }, (e) => {
          res.status(400).send();
       });
+});
+
+app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 
