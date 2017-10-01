@@ -26,7 +26,26 @@ const auth = (state=false,action) => {
 }
 
 const rootReducer = combineReducers({
-  form: formReducer,
+  form: formReducer.plugin({
+    signupForm:(state, action) => {
+      switch(action.type) {
+        case C.AUTHENTICATED:
+          return undefined;
+        default:
+          return state;
+      }
+    }
+  }),
+  form: formReducer.plugin({
+    loginForm: (state,action) => {
+      switch(action.type) {
+        case C.AUTHENTICATED:
+          return undefined;
+        default:
+          return state;
+      }
+    }
+  }),
   todos,
   auth
 });
