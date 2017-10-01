@@ -35,7 +35,7 @@ export const loginAction = ({email,password}, history) => {
 
       localStorage.setItem('x-auth', res.headers['x-auth']);
 
-      history.push('/todos');
+      // history.push('/todos');
     } catch (error) {
       dispatch({
         type: C.AUTHENTICATION_ERROR,

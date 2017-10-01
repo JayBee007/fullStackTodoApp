@@ -34,9 +34,7 @@ const rootReducer = combineReducers({
         default:
           return state;
       }
-    }
-  }),
-  form: formReducer.plugin({
+    },
     loginForm: (state,action) => {
       switch(action.type) {
         case C.AUTHENTICATED:

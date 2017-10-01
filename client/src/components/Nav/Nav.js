@@ -35,9 +35,8 @@ class Nav extends Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth.auth
   };
 }
-
 
 export default connect(mapStateToProps, {signOutAction})(Nav);
