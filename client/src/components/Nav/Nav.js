@@ -1,19 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import {signOutAction} from '../../redux/actions';
+
 import './Nav.css';
 
-function Nav() {
-  return (
-    <nav>
+class Nav extends Component {
+  navbarLinks() {
+    if(this.props.auth) {
+      return (
+        <ul>
+          <li><Link to="/login" onClick={this.props.signOutAction}>Logout</Link></li>
+        </ul>
+      );
+    }
+
+    return (
       <ul>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
       </ul>
-    </nav>
-  );
+    );
+  }
+
+  render() {
+    return (
+      <nav>
+        {this.navbarLinks()}
+      </nav>
+    )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
 }
 
 
-
-
-export default Nav;
+export default connect(mapStateToProps, {signOutAction})(Nav);
