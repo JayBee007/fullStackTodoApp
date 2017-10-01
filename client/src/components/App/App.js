@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Route} from 'react-router-dom';
 
 import ReqAuth from '../HoC/ReqAuth';
+import NoReqAuth from '../HoC/NoReqAuth';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Todos from '../Todos/Todos';
@@ -15,8 +16,8 @@ class App extends Component {
       <div className="container">
         <Nav />
         <Route path="/todos" component={ReqAuth(Todos)} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={NoReqAuth(Login)} />
+        <Route path="/signup" component={NoReqAuth(Signup)} />
       </div>
     );
   }
