@@ -181,13 +181,8 @@ app.get("*", (req,res) => {
 
 
 
-<<<<<<< HEAD
 app.listen(PORT,HOST,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
-=======
-app.listen(PORT,() => {
-   console.log(`Server started on port ${PORT} and host ${IP}`);
->>>>>>> 3b05704c04fc6fa3e8d00ca18697ce46a5a7e74d
 });
 
 module.exports = {
