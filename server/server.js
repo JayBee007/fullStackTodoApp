@@ -172,7 +172,7 @@ app.delete('/users/me/token', authenticate, (req,res) => {
 
 
 
-app.listen(PORT,HOST,() => {
+app.listen(process.env.PORT,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
 });
 
