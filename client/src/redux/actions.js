@@ -46,8 +46,32 @@ export const loginAction = ({email,password}, history) => {
 }
 
 export function signOutAction() {
-  localStorage.removeItem('x-auth');
-  return {
-    type: C.UNAUTHENTICATED
+  const token = localStorage.getItem('x-auth');
+  const options = {
+    headers: {
+      'x-auth': token
+    }
   };
+  return async (dispatch) => {
+    try{
+      const res = await axios.delete(`users/me/token`, options);
+
+      if(res.status === 200) {
+        dispatch({type: C.UNAUTHENTICATED});
+      }else {
+        dispatch({
+          type: C.AUTHENTICATION_ERROR,
+          payload: "No such user"
+        });
+      }
+
+      localStorage.removeItem('x-auth');
+
+    }catch (error) {
+      dispatch({
+        type: C.AUTHENTICATION_ERROR,
+        payload: "Already signed out"
+      });
+    }
+  }
 }
