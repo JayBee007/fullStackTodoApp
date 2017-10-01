@@ -1,5 +1,6 @@
 require("./config/config");
 var express = require("express");
+var path = require("path");
 var bodyParser = require("body-parser");
 var _ = require("lodash");
 
@@ -13,10 +14,15 @@ var HOST = process.env.IP || 'localhost';
 
 var app = express();
 
+app.use(express.static('client/build'));
+
+var PORT = process.env.PORT || 3001;
+var IP = process.env.PORT || 'localhost';
+
 app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
-   res.send("hello world");
+      res.sendFile('index.html');
 });
 
 app.post('/todos', authenticate, (req,res) => {
@@ -169,11 +175,19 @@ app.delete('/users/me/token', authenticate, (req,res) => {
       });
 });
 
+app.get("*", (req,res) => {
+      res.sendFile(path.join(__dirname,'/client/build/index.html'));
+});
 
 
 
+<<<<<<< HEAD
 app.listen(PORT,HOST,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
+=======
+app.listen(PORT,() => {
+   console.log(`Server started on port ${PORT} and host ${IP}`);
+>>>>>>> 3b05704c04fc6fa3e8d00ca18697ce46a5a7e74d
 });
 
 module.exports = {
