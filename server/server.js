@@ -9,7 +9,7 @@ var {Todo} = require("./models/todo");
 var {User} = require("./models/user");
 var {authenticate} = require("./middleware/authenticate");
 
-var PORT = process.env.PORT || 3001;
+// var PORT = process.env.PORT || 3001;
 var HOST = process.env.IP || 'localhost';
 
 var app = express();
@@ -179,7 +179,7 @@ app.get('*', (req, res) => {
 
 
 
-app.listen(process.env.PORT,HOST,() => {
+app.listen(process.env.PORT,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
 });
 
