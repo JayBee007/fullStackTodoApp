@@ -6,7 +6,7 @@ import C from './constants';
 const todos = (state = [], action) => {
   switch (action.type) {
     case C.ADD_TODO:
-      return {...state, text:action.text}
+      return [...state, {text:action.text, id:action.id, completed:action.completed,completedAt:action.completedAt}];
     default:
       return state;
   }
@@ -39,6 +39,12 @@ const rootReducer = combineReducers({
       switch(action.type) {
         case C.AUTHENTICATED:
           return undefined;
+        default:
+          return state;
+      }
+    },
+    inputForm: (state,action) => {
+      switch(action.type) {
         default:
           return state;
       }

@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-function Todos(props) {
-  return (
-    <h1>Todos Component</h1>
-  );
+import {addTodoAction} from '../../redux/actions';
+import InputForm from '../Input/InputForm';
+
+
+class Todos extends Component {
+  submit = (values) => {
+    this.props.addTodoAction(values);
+  }
+
+  render() {
+    return (
+      <InputForm onSubmit={this.submit} />
+    )
+  }
 }
 
-export default Todos;
+export default connect(null, {addTodoAction})(Todos);

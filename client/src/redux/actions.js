@@ -1,10 +1,34 @@
 import C from './constants';
 import axios from 'axios';
 
-export const addTodo = text => {
+export const addTodo = (text,id,completed,completedAt) => {
   return {
     type: C.ADD_TODO,
-    text
+    text,
+    id,
+    completed,
+    completedAt
+  }
+}
+
+export const addTodoAction = ({text}) => {
+  const token = localStorage.getItem('x-auth');
+  const options = {
+    headers: {
+      'x-auth': token
+    }
+  };
+  return async (dispatch) => {
+    try {
+      const res = await axios.post('todos', {text}, options);
+      console.log(res.data);
+      if(res.status === 200) {
+        dispatch(addTodo(res.data.text,res.data._id, res.data.completed));
+      }
+
+    }catch(error) {
+      console.log(error);
+    }
   }
 }
 
