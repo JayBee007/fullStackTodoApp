@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
+import CenterGrid from '../HoC/CenterGrid';
 import {addTodoAction} from '../../redux/actions';
 import InputForm from '../Input/InputForm';
 
@@ -12,8 +13,10 @@ class Todos extends Component {
 
   render() {
     return (
-      <InputForm onSubmit={this.submit} />
-    )
+      <CenterGrid>
+        <InputForm onSubmit={this.submit} />
+      </CenterGrid>
+    );
   }
 }
 

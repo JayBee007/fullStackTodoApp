@@ -1,16 +1,19 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
+import {Form, FormField,Input} from 'semantic-ui-react';
 
 let InputForm = props => {
   const {handleSubmit,submit} = props;
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
-      <div>
-        <Field name="text" component="input" type="text" />
-      </div>
-    </form>
-  )
+    <Form onSubmit={handleSubmit(submit)}>
+      <FormField>
+        <Input>
+          <Field placeholder="Add ToDo" name="text" component="input" type="text" />
+        </Input>
+      </FormField>
+    </Form>
+  );
 }
 
 InputForm = reduxForm({
