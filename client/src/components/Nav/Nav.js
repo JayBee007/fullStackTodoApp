@@ -9,9 +9,9 @@ class Nav extends Component {
   navbarLinks() {
     if(this.props.auth) {
       return (
-        <Menu attached="top">
+        <Menu fixed="top" inverted borderless size="massive">
           <Menu.Item position="right">
-          <Link to="/login" onClick={this.props.signOutAction}>Logout</Link>
+            <Link to="/login" onClick={this.props.signOutAction}>Logout</Link>
           </Menu.Item>
         </Menu>
       );
