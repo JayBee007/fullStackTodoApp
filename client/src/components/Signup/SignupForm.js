@@ -1,24 +1,23 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
+import {Form, FormField, Input, Button} from 'semantic-ui-react';
 
 let SignupForm = props => {
-  const {handleSubmit} = props;
+  const {handleSubmit,submit} = props;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <Form onSubmit={handleSubmit(submit)}>
+      <FormField>
         <label htmlFor="email">E-mail</label>
-        <Field name="email" component="input" type="text" />
-      </div>
-
-      <div>
-        <label htmlFor="password">password</label>
-        <Field name="password" component="input" type="password" />
-      </div>
-
-      <button type="submit">Signup</button>
-    </form>
-  )
+        <Input><Field name="email" component="input" type="text" /></Input>
+      </FormField>
+      <FormField>
+        <label htmlFor="password">Password</label>
+        <Input><Field name="password" component="input" type="password" /></Input>
+      </FormField>
+      <Button primary type='submit'>Signup</Button>
+    </Form>
+  );
 }
 
 SignupForm = reduxForm({

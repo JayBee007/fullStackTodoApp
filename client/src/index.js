@@ -5,6 +5,7 @@ import {createStore, applyMiddleware} from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
 
+import 'semantic-ui-css/semantic.min.css';
 import state from './redux/reducers';
 import './index.css';
 import App from './components/App/App';

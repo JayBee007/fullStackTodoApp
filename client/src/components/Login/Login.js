@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { Segment, Grid } from 'semantic-ui-react'
 
 import LoginForm from './LoginForm';
 import {loginAction} from '../../redux/actions';
@@ -11,8 +12,17 @@ class Login extends React.Component {
 
   render() {
     return (
-      <LoginForm onSubmit={this.submit} />
-    )
+      <Grid columns={2} centered doubling>
+        <Grid.Row>
+          <Grid.Column>
+            <Segment>
+              <h1>Login</h1>
+              <LoginForm onSubmit={this.submit} />
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
   }
 }
 
