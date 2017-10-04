@@ -11,7 +11,10 @@ class Nav extends Component {
       return (
         <Menu fixed="top" inverted borderless size="massive">
           <Menu.Item position="right">
-            <NavLink to="/login" onClick={this.props.signOutAction}>Logout</NavLink>
+            <NavLink to="/todos">Todos</NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink to="/" onClick={this.props.signOutAction}>Logout</NavLink>
           </Menu.Item>
         </Menu>
       );

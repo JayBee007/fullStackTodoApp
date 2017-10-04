@@ -7,6 +7,7 @@ import NoReqAuth from '../HoC/NoReqAuth';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import Todos from '../Todos/Todos';
+import Main from '../Main/Main';
 
 import Nav from '../Nav/Nav'
 
@@ -16,6 +17,7 @@ class App extends Component {
       <Container style={{paddingTop:'70px'}}>
         <Nav />
         <Switch>
+          <Route path="/" exact component={Main} />
           <Route path="/todos" exact component={ReqAuth(Todos)} />
           <Route path="/login" exact component={NoReqAuth(Login)} />
           <Route path="/signup" exact component={NoReqAuth(Signup)} />
