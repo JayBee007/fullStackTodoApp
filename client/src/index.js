@@ -11,6 +11,7 @@ import state from './redux/reducers';
 import './index.css';
 import App from './components/App/App';
 import C from './redux/constants';
+import {authAction} from './redux/actions';
 import registerServiceWorker from './registerServiceWorker';
 
 const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(reduxThunk))(createStore);
@@ -18,9 +19,11 @@ const createStoreWithMiddleware = composeWithDevTools(applyMiddleware(reduxThunk
 export const store = createStoreWithMiddleware(state);
 
 const x_auth = localStorage.getItem('x-auth');
-
+const userEmail = localStorage.getItem('userEmail');
+const userId = localStorage.getItem('userId');
 if(x_auth) {
   store.dispatch({type: C.AUTHENTICATED});
+  store.dispatch(authAction(userEmail,userId));
 }
 
 ReactDOM.render(

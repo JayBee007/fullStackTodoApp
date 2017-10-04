@@ -2,6 +2,7 @@ import C from './constants';
 import axios from 'axios';
 
 export const addTodo = (text,id,completed,completedAt) => {
+
   return {
     type: C.ADD_TODO,
     text,
@@ -12,7 +13,7 @@ export const addTodo = (text,id,completed,completedAt) => {
 }
 
 export const fetchTodo = (todos) => {
-  console.log('fetchTodo');
+
   return {
     type: C.FETCH_TODO,
     todos
@@ -38,7 +39,8 @@ export const addTodoAction = ({text}) => {
     try {
       const res = await axios.post('todos', {text}, options);
       if(res.status === 200) {
-        dispatch(addTodo(res.data.text,res.data._id, res.data.completed));
+
+        dispatch(addTodo(res.data.text,res.data._id, res.data.completed,res.data.completedAt));
       }
 
     }catch(error) {
@@ -57,7 +59,7 @@ export const fetchTodoAction = () => {
   return async (dispatch) => {
     try{
       const res = await axios.get('todos',options);
-        console.log('fetchTodoAction',res.data);
+
         dispatch(fetchTodo(res.data.todos));
 
     }catch(error) {
@@ -88,9 +90,15 @@ export const loginAction = ({email,password}, history) => {
     try {
       const res = await axios.post('users/login', {email,password});
 
+      if(res.status === 200) {
+        localStorage.setItem('x-auth', res.headers['x-auth']);
+        localStorage.setItem('userEmail', res.data.email);
+        localStorage.setItem('userId', res.data._id);
+      }
+
       dispatch({type: C.AUTHENTICATED});
 
-      localStorage.setItem('x-auth', res.headers['x-auth']);
+
 
       dispatch(authAction(res.data.email,res.data._id));
 
@@ -115,6 +123,9 @@ export function signOutAction() {
       const res = await axios.delete(`users/me/token`, options);
 
       if(res.status === 200) {
+        localStorage.removeItem('x-auth');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userId');
         dispatch({type: C.UNAUTHENTICATED});
       }else {
         dispatch({
@@ -122,8 +133,6 @@ export function signOutAction() {
           payload: "No such user"
         });
       }
-
-      localStorage.removeItem('x-auth');
 
     }catch (error) {
       dispatch({

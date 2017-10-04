@@ -5,7 +5,7 @@ import C from './constants';
 const todos = (state = [], action) => {
   switch (action.type) {
     case C.ADD_TODO:
-      return [...state, {text:action.text, id:action.id, completed:action.completed,completedAt:action.completedAt}];
+      return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
     case C.FETCH_TODO:
       return [...action.todos];
     default:
@@ -56,6 +56,8 @@ const rootReducer = combineReducers({
     },
     inputForm: (state,action) => {
       switch(action.type) {
+        case C.ADD_TODO:
+          return undefined;
         default:
           return state;
       }
