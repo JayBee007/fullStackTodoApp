@@ -1,35 +1,38 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import {Menu} from 'semantic-ui-react';
 
 import {signOutAction} from '../../redux/actions';
-
-import './Nav.css';
 
 class Nav extends Component {
   navbarLinks() {
     if(this.props.auth) {
       return (
-        <ul>
-          <li><Link to="/login" onClick={this.props.signOutAction}>Logout</Link></li>
-        </ul>
+        <Menu fixed="top" inverted borderless size="massive">
+          <Menu.Item position="right">
+            <NavLink to="/login" onClick={this.props.signOutAction}>Logout</NavLink>
+          </Menu.Item>
+        </Menu>
       );
     }
 
     return (
-      <ul>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/signup">Signup</Link></li>
-      </ul>
+    <Menu fixed="top" inverted borderless size="massive">
+      <Menu.Item position="right">
+        <NavLink to="/login">Login</NavLink>
+      </Menu.Item>
+      <Menu.Item>
+        <NavLink to="/signup">Signup</NavLink>
+      </Menu.Item>
+    </Menu>
     );
   }
 
   render() {
     return (
-      <nav>
-        {this.navbarLinks()}
-      </nav>
-    )
+        this.navbarLinks()
+    );
   }
 }
 

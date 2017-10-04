@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Segment} from 'semantic-ui-react';
 
+import CenterGrid from '../HoC/CenterGrid';
 import {signUpAction} from '../../redux/actions';
 import SignupForm from './SignupForm';
 
@@ -11,8 +13,13 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <SignupForm onSubmit={this.submit} />
-    )
+      <CenterGrid>
+        <Segment>
+          <h1>Signup</h1>
+          <SignupForm onSubmit={this.submit} />
+        </Segment>
+      </CenterGrid>
+    );
   }
 }
 

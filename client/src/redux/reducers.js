@@ -2,11 +2,22 @@ import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import C from './constants';
 
-
 const todos = (state = [], action) => {
   switch (action.type) {
     case C.ADD_TODO:
-      return {...state, text:action.text}
+      return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
+    case C.FETCH_TODO:
+      return [...action.todos];
+    default:
+      return state;
+  }
+}
+
+const user = (state="",action) => {
+  const {email,id} = action;
+  switch(action.type) {
+    case C.USER_DATA:
+      return {email,id}
     default:
       return state;
   }
@@ -42,9 +53,18 @@ const rootReducer = combineReducers({
         default:
           return state;
       }
+    },
+    inputForm: (state,action) => {
+      switch(action.type) {
+        case C.ADD_TODO:
+          return undefined;
+        default:
+          return state;
+      }
     }
   }),
   todos,
+  user,
   auth
 });
 

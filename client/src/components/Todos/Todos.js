@@ -1,9 +1,42 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {List} from 'semantic-ui-react';
 
-function Todos(props) {
-  return (
-    <h1>Todos Component</h1>
-  );
+import CenterGrid from '../HoC/CenterGrid';
+import Todo from '../Todo/Todo';
+import InputForm from '../Input/InputForm';
+import {addTodoAction, fetchTodoAction} from '../../redux/actions';
+
+class Todos extends Component {
+  submit = (values) => {
+    this.props.addTodoAction(values);
+  }
+
+  componentDidMount() {
+    this.props.fetchTodoAction();
+  }
+
+  loadTodos = () => {
+    return this.props.todos.map((todo) => {
+      return (<Todo key={todo._id} {...todo} />)
+    });
+  }
+
+  render() {
+    return (
+      <CenterGrid>
+        <InputForm onSubmit={this.submit} />
+        <List>
+          {this.loadTodos()}
+        </List>
+      </CenterGrid>
+    );
+  }
 }
 
-export default Todos;
+function mapStateToProps(state) {
+  return {
+    todos:state.todos
+  }
+}
+export default connect(mapStateToProps,{addTodoAction,fetchTodoAction})(Todos);
