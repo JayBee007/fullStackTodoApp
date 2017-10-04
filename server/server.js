@@ -21,17 +21,9 @@ var IP = process.env.PORT || 'localhost';
 
 app.use(bodyParser.json());
 
-<<<<<<< HEAD
 app.get('/', (req,res) => {
       res.sendFile('index.html');
 });
-=======
-app.use(express.static(path.join(__dirname, '../client/build')));
-
-// app.get('/', (req,res) => {
-//    res.send("hello world");
-// });
->>>>>>> client
 
 app.post('/todos', authenticate, (req,res) => {
    var todo = new Todo({
@@ -189,7 +181,7 @@ app.get("*", (req,res) => {
 
 
 
-app.listen(PORT,HOST,() => {
+app.listen(process.env.PORT,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
 });
 
