@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import ReqAuth from '../HoC/ReqAuth';
@@ -15,9 +15,12 @@ class App extends Component {
     return (
       <Container style={{paddingTop:'70px'}}>
         <Nav />
-        <Route path="/todos" component={ReqAuth(Todos)} />
-        <Route path="/login" component={NoReqAuth(Login)} />
-        <Route path="/signup" component={NoReqAuth(Signup)} />
+        <Switch>
+          <Route path="/todos" exact component={ReqAuth(Todos)} />
+          <Route path="/login" exact component={NoReqAuth(Login)} />
+          <Route path="/signup" exact component={NoReqAuth(Signup)} />
+        </Switch>
+
       </Container>
     );
   }

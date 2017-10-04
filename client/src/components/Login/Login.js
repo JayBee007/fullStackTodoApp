@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Segment, Grid } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 
 import CenterGrid from '../HoC/CenterGrid';
 import LoginForm from './LoginForm';

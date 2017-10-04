@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {Menu} from 'semantic-ui-react';
 
 import {signOutAction} from '../../redux/actions';
@@ -11,7 +11,7 @@ class Nav extends Component {
       return (
         <Menu fixed="top" inverted borderless size="massive">
           <Menu.Item position="right">
-            <Link to="/login" onClick={this.props.signOutAction}>Logout</Link>
+            <NavLink to="/login" onClick={this.props.signOutAction}>Logout</NavLink>
           </Menu.Item>
         </Menu>
       );
@@ -20,10 +20,10 @@ class Nav extends Component {
     return (
     <Menu fixed="top" inverted borderless size="massive">
       <Menu.Item position="right">
-        <Link to="/login">Login</Link>
+        <NavLink to="/login">Login</NavLink>
       </Menu.Item>
       <Menu.Item>
-        <Link to="/signup">Signup</Link>
+        <NavLink to="/signup">Signup</NavLink>
       </Menu.Item>
     </Menu>
     );
