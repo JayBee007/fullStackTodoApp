@@ -9,8 +9,8 @@ const Todo = (props) => {
     console.log("edit");
   }
 
-  const handleDeleteChange = () => {
-    console.log("delete");
+  const handleDeleteChange = (id) => {
+    props.handleDeleteTodo(id);
   }
   return (
     <ListItem>
@@ -20,7 +20,7 @@ const Todo = (props) => {
           <Checkbox className={props.completed ? "checked" : "" } onChange={handleCompleteChange} label={props.text}/>
           <div style={{float:'right'}}>
             <Icon onClick={handleEditChange} style={{cursor:'pointer'}} color="green" size="large" name="edit"/>
-            <Icon onClick={handleDeleteChange} style={{cursor:'pointer'}} color="red" size="large" name="delete"/>
+            <Icon onClick={() => handleDeleteChange(props._id)} style={{cursor:'pointer'}} color="red" size="large" name="delete"/>
           </div>
         </Form.Field>
         </Form>
