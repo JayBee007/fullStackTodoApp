@@ -1,5 +1,8 @@
-import C from './constants';
 import axios from 'axios';
+
+import request from '../util/util';
+import C from './constants';
+
 
 export const addTodo = (text,id,completed,completedAt) => {
 
@@ -29,15 +32,15 @@ export const authAction = (email,id) => {
 }
 
 export const addTodoAction = ({text}) => {
-  const token = localStorage.getItem('x-auth');
-  const options = {
-    headers: {
-      'x-auth': token
-    }
-  };
+  // const token = localStorage.getItem('x-auth');
+  // const options = {
+  //   headers: {
+  //     'x-auth': token
+  //   }
+  // };
   return async (dispatch) => {
     try {
-      const res = await axios.post('todos', {text}, options);
+      const res = await request.post('todos', {text});
       if(res.status === 200) {
 
         dispatch(addTodo(res.data.text,res.data._id, res.data.completed,res.data.completedAt));
@@ -141,4 +144,8 @@ export function signOutAction() {
       });
     }
   }
+}
+
+export function deleteTodoAction() {
+
 }
