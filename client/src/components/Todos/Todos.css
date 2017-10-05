@@ -1,0 +1,14 @@
+.mainContent {
+  background:rgba(0,0,0,.6);
+  padding: 20px 20px 10px;
+}
+
+.ui.checkbox label, .ui.checkbox+label {
+  color:white !important;
+}
+
+.ui.checked.checkbox {
+  text-decoration: line-through;
+  text-decoration-color: whitesmoke;
+}
+

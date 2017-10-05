@@ -8,6 +8,10 @@ const todos = (state = [], action) => {
       return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
     case C.FETCH_TODO:
       return [...action.todos];
+    case C.DELETE_TODO:
+      return state.filter((todo) => {
+        return todo._id !== action.id;
+      })
     default:
       return state;
   }

@@ -1,5 +1,6 @@
+import request from '../util/util';
 import C from './constants';
-import axios from 'axios';
+
 
 export const addTodo = (text,id,completed,completedAt) => {
 
@@ -29,15 +30,10 @@ export const authAction = (email,id) => {
 }
 
 export const addTodoAction = ({text}) => {
-  const token = localStorage.getItem('x-auth');
-  const options = {
-    headers: {
-      'x-auth': token
-    }
-  };
+
   return async (dispatch) => {
     try {
-      const res = await axios.post('todos', {text}, options);
+      const res = await request.post('todos', {text});
       if(res.status === 200) {
 
         dispatch(addTodo(res.data.text,res.data._id, res.data.completed,res.data.completedAt));
@@ -50,15 +46,10 @@ export const addTodoAction = ({text}) => {
 }
 
 export const fetchTodoAction = () => {
-  const token = localStorage.getItem('x-auth');
-  const options = {
-    headers: {
-      'x-auth': token
-    }
-  };
+
   return async (dispatch) => {
     try{
-      const res = await axios.get('todos',options);
+      const res = await request.get('todos');
 
         dispatch(fetchTodo(res.data.todos));
 
@@ -71,7 +62,7 @@ export const fetchTodoAction = () => {
 export const signUpAction = ({email,password}, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('users', {email,password});
+      const res = await request.post('users', {email,password});
 
       dispatch({type: C.AUTHENTICATED});
 
@@ -88,7 +79,7 @@ export const signUpAction = ({email,password}, history) => {
 export const loginAction = ({email,password}, history) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('users/login', {email,password});
+      const res = await request.post('users/login', {email,password});
 
       if(res.status === 200) {
         localStorage.setItem('x-auth', res.headers['x-auth']);
@@ -112,15 +103,10 @@ export const loginAction = ({email,password}, history) => {
 }
 
 export function signOutAction() {
-  const token = localStorage.getItem('x-auth');
-  const options = {
-    headers: {
-      'x-auth': token
-    }
-  };
+
   return async (dispatch) => {
     try{
-      const res = await axios.delete(`users/me/token`, options);
+      const res = await request.delete(`users/me/token`);
 
       if(res.status === 200) {
         localStorage.removeItem('x-auth');
@@ -139,6 +125,23 @@ export function signOutAction() {
         type: C.AUTHENTICATION_ERROR,
         payload: "Already signed out"
       });
+    }
+  }
+}
+
+export function deleteTodoAction(id) {
+
+  return async (dispatch) => {
+    try {
+      const res = await request.delete(`todos/${id}`);
+      console.log('deleteTodoAction',res);
+
+      if(res.status === 200) {
+        dispatch({type:C.DELETE_TODO,id});
+      }
+
+    }catch(error) {
+      console.log(error);
     }
   }
 }

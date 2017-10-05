@@ -1,0 +1,23 @@
+h1.header.mainHeader{
+  color:#fff;
+  font-size: 4em;
+  font-weight: normal;
+  margin-bottom: 0;
+  margin-top: 3em !important;
+
+}
+
+h2.header.secondHeader{
+  font-size:1.7em;
+  font-weight: 700;
+}
+
+.ctaLink {
+  text-decoration: none;
+  color:white;
+  font-size: 1.3em;
+}
+
+.ctaLink:hover {
+  color:lightcyan;
+}
