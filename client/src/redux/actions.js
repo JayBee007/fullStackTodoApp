@@ -63,7 +63,7 @@ export const signUpAction = ({email,password}, history) => {
       const res = await request.post('users', {email,password});
 
       localStorage.setItem('x-auth',res.headers['x-auth']);
-
+      setAuthToken(localStorage.getItem('x-auth');)
       dispatch({type: C.AUTHENTICATED});
     }catch (error) {
       dispatch({
