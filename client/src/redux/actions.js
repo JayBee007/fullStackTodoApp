@@ -21,7 +21,7 @@ export const fetchTodo = (todos) => {
 
 export const authAction = (email,id) => {
   return {
-    type: C.USER_DATA,
+    type: C.ADD_USER_DATA,
     email,
     id
   }
@@ -112,6 +112,8 @@ export function signOutAction() {
         localStorage.removeItem('userId');
         setAuthToken();
         dispatch({type: C.UNAUTHENTICATED});
+        dispatch({type: C.REMOVE_TODOS});
+        dispatch({type: C.REMOVE_USER_DATA});
       }else {
         dispatch({
           type: C.AUTHENTICATION_ERROR,

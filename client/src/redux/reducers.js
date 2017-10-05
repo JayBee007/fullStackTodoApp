@@ -11,7 +11,9 @@ const todos = (state = [], action) => {
     case C.DELETE_TODO:
       return state.filter((todo) => {
         return todo._id !== action.id;
-      })
+      });
+    case C.REMOVE_TODOS:
+      return [];
     default:
       return state;
   }
@@ -20,8 +22,10 @@ const todos = (state = [], action) => {
 const user = (state="",action) => {
   const {email,id} = action;
   switch(action.type) {
-    case C.USER_DATA:
+    case C.ADD_USER_DATA:
       return {email,id}
+    case C.REMOVE_USER_DATA:
+      return "";
     default:
       return state;
   }
@@ -30,11 +34,11 @@ const user = (state="",action) => {
 const auth = (state=false,action) => {
   switch (action.type) {
     case C.AUTHENTICATED:
-      return {...state, auth:true};
+      return {...state, auth:true, error:""};
     case C.UNAUTHENTICATED:
-      return {...state, auth:false};
+      return {...state, auth:false, error:""};
     case C.AUTHENTICATION_ERROR:
-      return {...state, error:action.payload}
+      return {...state,auth:false,error:action.payload}
     default:
       return state;
   }
