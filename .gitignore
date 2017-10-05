@@ -2,3 +2,5 @@ node_modules
 data
 playground
 server/config/config.json
+/data
+.vscode
