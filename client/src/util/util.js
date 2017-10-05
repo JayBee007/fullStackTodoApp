@@ -1,12 +1,19 @@
 import axios from 'axios';
 
-const token = localStorage.getItem('x-auth');
+export const setAuthToken = (token) => {
+  if(token) {
+    axios.defaults.headers.common['x-auth'] = token;
+  }else {
+    delete axios.defaults.headers.common['x-auth'];
+  }
+}
 
-const client = (token = null) => {
+const client = () => {
 
   const defaultOptions = {
     headers: {
-      'x-auth': token
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     }
   };
 
@@ -22,6 +29,6 @@ const client = (token = null) => {
 
 };
 
-const request = client(token);
+const request = client();
 
 export default request;

@@ -1,6 +1,5 @@
-import request from '../util/util';
+import request, {setAuthToken} from '../util/util';
 import C from './constants';
-
 
 export const addTodo = (text,id,completed,completedAt) => {
 
@@ -14,7 +13,6 @@ export const addTodo = (text,id,completed,completedAt) => {
 }
 
 export const fetchTodo = (todos) => {
-
   return {
     type: C.FETCH_TODO,
     todos
@@ -64,9 +62,9 @@ export const signUpAction = ({email,password}, history) => {
     try {
       const res = await request.post('users', {email,password});
 
-      dispatch({type: C.AUTHENTICATED});
-
       localStorage.setItem('x-auth',res.headers['x-auth']);
+
+      dispatch({type: C.AUTHENTICATED});
     }catch (error) {
       dispatch({
         type: C.AUTHENTICATION_ERROR,
@@ -87,9 +85,9 @@ export const loginAction = ({email,password}, history) => {
         localStorage.setItem('userId', res.data._id);
       }
 
+      setAuthToken(localStorage.getItem('x-auth'));
+
       dispatch({type: C.AUTHENTICATED});
-
-
 
       dispatch(authAction(res.data.email,res.data._id));
 
@@ -112,6 +110,7 @@ export function signOutAction() {
         localStorage.removeItem('x-auth');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userId');
+        setAuthToken();
         dispatch({type: C.UNAUTHENTICATED});
       }else {
         dispatch({
