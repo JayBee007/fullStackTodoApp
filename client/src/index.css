@@ -10,3 +10,9 @@ body {
   right:10px;
   cursor: pointer;
 }
+
+.short_text {
+  color:rgba(160, 154, 154, 0.87);
+  font-size: 10px;
+  margin-left: 25px;
+}

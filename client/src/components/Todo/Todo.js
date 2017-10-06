@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {ListItem, ListContent, Divider, Form, Checkbox, Icon} from 'semantic-ui-react';
 
 const Todo = (props) => {
@@ -32,6 +33,7 @@ const Todo = (props) => {
         <Form>
         <Form.Field>
           {checked()}
+          {props.completedAt && <p className="short_text">completed At: {moment(props.completedAt).format('LLL')}</p>}
           <div style={{float:'right'}}>
             <Icon onClick={handleEditChange} style={{cursor:'pointer'}} color="green" size="large" name="edit"/>
             <Icon onClick={() => handleDeleteChange(props._id)} style={{cursor:'pointer'}} color="red" size="large" name="delete"/>
