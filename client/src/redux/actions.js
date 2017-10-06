@@ -150,9 +150,9 @@ export function completeTodoAction(id,completed) {
   return async (dispatch) => {
     try {
       const res = await request.patch(`todos/${id}`, {completed});
-
+      const completedAt = res.data.todo.completedAt;
       if(res.status === 200) {
-        dispatch({type:C.COMPLETE_TODO,id});
+        dispatch({type:C.COMPLETE_TODO,id,completedAt});
       }
 
     }catch(error) {

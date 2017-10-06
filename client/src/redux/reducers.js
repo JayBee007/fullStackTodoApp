@@ -15,7 +15,7 @@ const todos = (state = [], action) => {
     case C.COMPLETE_TODO:
       return state.map((todo) => {
         return (todo._id === action.id)
-          ? {...todo, completed: !todo.completed}
+          ? {...todo, completed: !todo.completed, completedAt:action.completedAt}
           :todo
       })
     case C.REMOVE_TODOS:
