@@ -135,10 +135,24 @@ export function deleteTodoAction(id) {
   return async (dispatch) => {
     try {
       const res = await request.delete(`todos/${id}`);
-      console.log('deleteTodoAction',res);
 
       if(res.status === 200) {
         dispatch({type:C.DELETE_TODO,id});
+      }
+
+    }catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+export function completeTodoAction(id,completed) {
+  return async (dispatch) => {
+    try {
+      const res = await request.patch(`todos/${id}`, {completed});
+
+      if(res.status === 200) {
+        dispatch({type:C.COMPLETE_TODO,id});
       }
 
     }catch(error) {

@@ -5,7 +5,7 @@ import {List} from 'semantic-ui-react';
 import CenterGrid from '../HoC/CenterGrid';
 import Todo from '../Todo/Todo';
 import InputForm from '../Input/InputForm';
-import {addTodoAction, fetchTodoAction,deleteTodoAction} from '../../redux/actions';
+import {addTodoAction, fetchTodoAction,deleteTodoAction, completeTodoAction} from '../../redux/actions';
 import './Todos.css';
 
 class Todos extends Component {
@@ -19,7 +19,9 @@ class Todos extends Component {
 
   loadTodos = () => {
     return this.props.todos.map((todo) => {
-      return (<Todo key={todo._id} handleDeleteTodo={this.props.deleteTodoAction} {...todo} />)
+      return (<Todo key={todo._id}
+                handleCompleteTodo={this.props.completeTodoAction}
+                handleDeleteTodo={this.props.deleteTodoAction} {...todo} />)
     });
   }
 
@@ -43,4 +45,4 @@ function mapStateToProps(state) {
     todos:state.todos
   }
 }
-export default connect(mapStateToProps,{addTodoAction,fetchTodoAction,deleteTodoAction})(Todos);
+export default connect(mapStateToProps,{addTodoAction,fetchTodoAction,deleteTodoAction, completeTodoAction})(Todos);
