@@ -4,3 +4,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.close__form {
+  position: absolute;
+  right:10px;
+  cursor: pointer;
+}
