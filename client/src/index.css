@@ -16,3 +16,9 @@ body {
   font-size: 10px;
   margin-left: 25px;
 }
+
+.action_icons {
+  position: absolute;
+  right:0;
+  top:0;
+}

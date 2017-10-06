@@ -34,7 +34,7 @@ const Todo = (props) => {
         <Form.Field>
           {checked()}
           {props.completedAt && <p className="short_text">completed At: {moment(props.completedAt).format('LLL')}</p>}
-          <div style={{float:'right'}}>
+          <div className="action_icons">
             <Icon onClick={handleEditChange} style={{cursor:'pointer'}} color="green" size="large" name="edit"/>
             <Icon onClick={() => handleDeleteChange(props._id)} style={{cursor:'pointer'}} color="red" size="large" name="delete"/>
           </div>
