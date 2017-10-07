@@ -22,7 +22,7 @@ var IP = process.env.PORT || 'localhost';
 app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
-      res.sendFile('index.html');
+      res.sendFile(path.join(__dirname,'/client/build/index.html'));
 });
 
 app.post('/todos', authenticate, (req,res) => {
