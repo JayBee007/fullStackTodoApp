@@ -3,6 +3,10 @@
   padding: 20px 20px 10px;
 }
 
+.mainContent h1{
+  color:white;
+}
+
 .ui.checkbox label, .ui.checkbox+label {
   color:white !important;
 }

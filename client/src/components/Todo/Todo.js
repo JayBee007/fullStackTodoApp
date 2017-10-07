@@ -1,14 +1,12 @@
 import React from 'react';
 import moment from 'moment';
+import {Link} from 'react-router-dom';
 import {ListItem, ListContent, Divider, Form, Checkbox, Icon} from 'semantic-ui-react';
 
 const Todo = (props) => {
 
   const handleCompleteChange = (id,completed) => {
     props.handleCompleteTodo(id,completed)
-  }
-  const handleEditChange = () => {
-    console.log("edit");
   }
 
   const handleDeleteChange = (id) => {
@@ -35,7 +33,7 @@ const Todo = (props) => {
           {checked()}
           {props.completedAt && <p className="short_text">completed At: {moment(props.completedAt).format('LLL')}</p>}
           <div className="action_icons">
-            <Icon onClick={handleEditChange} style={{cursor:'pointer'}} color="green" size="large" name="edit"/>
+            <Link to={`todos/${props._id}`}><Icon style={{cursor:'pointer'}} color="green" size="large" name="edit"/></Link>
             <Icon onClick={() => handleDeleteChange(props._id)} style={{cursor:'pointer'}} color="red" size="large" name="delete"/>
           </div>
         </Form.Field>
