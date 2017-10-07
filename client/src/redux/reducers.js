@@ -6,7 +6,7 @@ const todos = (state = [], action) => {
   switch (action.type) {
     case C.ADD_TODO:
       return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
-    case C.FETCH_TODO:
+    case C.FETCH_TODOS:
       return [...action.todos];
     case C.DELETE_TODO:
       return state.filter((todo) => {
@@ -20,6 +20,15 @@ const todos = (state = [], action) => {
       })
     case C.REMOVE_TODOS:
       return [];
+    default:
+      return state;
+  }
+}
+
+const todo = (state="",action) => {
+  switch (action.type) {
+    case C.FETCH_TODO:
+      return action.todo;
     default:
       return state;
   }
@@ -60,6 +69,12 @@ const rootReducer = combineReducers({
           return state;
       }
     },
+    editForm:(state,action) => {
+      switch(action.type) {
+        default:
+          return state;
+      }
+    },
     loginForm: (state,action) => {
       switch(action.type) {
         case C.AUTHENTICATED:
@@ -78,6 +93,7 @@ const rootReducer = combineReducers({
     }
   }),
   todos,
+  todo,
   user,
   auth
 });

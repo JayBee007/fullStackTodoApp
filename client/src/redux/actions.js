@@ -12,10 +12,17 @@ export const addTodo = (text,id,completed,completedAt) => {
   }
 }
 
-export const fetchTodo = (todos) => {
+export const fetchTodos = (todos) => {
+  return {
+    type: C.FETCH_TODOS,
+    todos
+  }
+}
+
+export const fetchTodo = (todo) => {
   return {
     type: C.FETCH_TODO,
-    todos
+    todo
   }
 }
 
@@ -43,18 +50,33 @@ export const addTodoAction = ({text}) => {
   }
 }
 
-export const fetchTodoAction = () => {
+export const fetchTodosAction = () => {
 
   return async (dispatch) => {
     try{
       const res = await request.get('todos');
 
-        dispatch(fetchTodo(res.data.todos));
+        dispatch(fetchTodos(res.data.todos));
 
     }catch(error) {
       console.log(error);
     }
   }
+}
+
+export const fetchTodoAction = (id) => {
+
+  return async (dispatch) => {
+    try {
+      const res = await request.get(id)
+      dispatch(fetchTodo(res.data.todo.text));
+    }catch(error) {
+      console.log(error);
+    }
+  }
+
+
+
 }
 
 export const signUpAction = ({email,password}, history) => {
@@ -155,6 +177,16 @@ export function completeTodoAction(id,completed) {
         dispatch({type:C.COMPLETE_TODO,id,completedAt});
       }
 
+    }catch(error) {
+      console.log(error);
+    }
+  }
+}
+
+export function editTodoAction(id,text) {
+  return async (dispatch) => {
+    try {
+      await request.patch(`/todos/${id}`, {text});
     }catch(error) {
       console.log(error);
     }
