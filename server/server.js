@@ -25,6 +25,14 @@ app.get('/', (req,res) => {
       res.sendFile(path.join(__dirname,'../client/build/index.html'));
 });
 
+app.get("/*", (req,res) => {
+      res.sendFile(path.join(__dirname,'../client/build/index.html'));
+});
+
+app.get("*", (req,res) => {
+      res.sendFile(path.join(__dirname,'../client/build/index.html'));
+});
+
 app.post('/todos', authenticate, (req,res) => {
    var todo = new Todo({
        text: req.body.text,
@@ -174,16 +182,6 @@ app.delete('/users/me/token', authenticate, (req,res) => {
          res.status(400).send();
       });
 });
-
-app.get("/*", (req,res) => {
-      res.sendFile(path.join(__dirname,'../client/build/index.html'));
-});
-
-app.get("*", (req,res) => {
-      res.sendFile(path.join(__dirname,'../client/build/index.html'));
-});
-
-
 
 app.listen(process.env.PORT,() => {
    console.log(`Server started on port ${PORT} and host ${HOST}`);
