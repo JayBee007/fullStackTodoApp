@@ -14,7 +14,8 @@ var HOST = process.env.IP || 'localhost';
 
 var app = express();
 
-app.use(express.static('client/build'));
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 
 var PORT = process.env.PORT || 3001;
 var IP = process.env.PORT || 'localhost';
@@ -22,7 +23,7 @@ var IP = process.env.PORT || 'localhost';
 app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
-      res.sendFile(path.join(__dirname,'/client/build/index.html'));
+      res.sendFile(path.join(__dirname,'../client/build/index.html'));
 });
 
 app.post('/todos', authenticate, (req,res) => {
@@ -176,7 +177,7 @@ app.delete('/users/me/token', authenticate, (req,res) => {
 });
 
 app.get("*", (req,res) => {
-      res.sendFile(path.join(__dirname,'/client/build/index.html'));
+      res.sendFile(path.join(__dirname,'../client/build/index.html'));
 });
 
 
