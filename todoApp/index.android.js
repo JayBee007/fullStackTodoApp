@@ -1,3 +1,6 @@
-import registerApp from './app/index';
+import {Provider} from 'react-redux';
 
-registerApp();
+import registerApp from './app/index';
+import store from './app/redux/store';
+
+registerApp(store,Provider);

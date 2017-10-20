@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View,StyleSheet, Button } from 'react-native';
-import Container from '../components/Container/Container'
+import {connect} from 'react-redux';
+
+import Container from '../components/Container/Container';
+import {addCounterAction} from '../redux/actions';
 
 class Home extends Component {
-  handleOnPress = () => {
-    this.props.navigator.push({screen:'Login', title:'Login'})
-  }
+  // handleOnPress = () => {
+  //   this.props.navigator.push({screen:'Login', title:'Login'})
+  // }
 
 
   render() {
@@ -18,7 +21,10 @@ class Home extends Component {
           <Text style={styles.subTitle}>
             Do whatever you want when you want to.
           </Text>
-          <Button title='Get Started' onPress={this.handleOnPress} />
+          <Text style={{color:'white',fontSize:20}}>
+            {0} - {this.props.counter}
+          </Text>
+          <Button title='Get Started' onPress={this.props.addCounterAction} />
         </View>
       </Container>
     );
@@ -28,8 +34,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'rgba(0,0,0,.1)',
-    height:'auto',
-    flexDirection: 'column',
+    flex:1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -47,4 +52,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    counter:state.counter
+  }
+}
+
+export default connect(mapStateToProps,{addCounterAction})(Home);
