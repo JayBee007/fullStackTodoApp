@@ -11,49 +11,49 @@ const counter = (state = 0, action) => {
   }
 }
 
-const todos = (state = [], action) => {
-  switch (action.type) {
-    case C.ADD_TODO:
-      return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
-    case C.FETCH_TODOS:
-      return [...action.todos];
-    case C.DELETE_TODO:
-      return state.filter((todo) => {
-        return todo._id !== action.id;
-      });
-    case C.COMPLETE_TODO:
-      return state.map((todo) => {
-        return (todo._id === action.id)
-          ? {...todo, completed: !todo.completed, completedAt:action.completedAt}
-          :todo
-      })
-    case C.REMOVE_TODOS:
-      return [];
-    default:
-      return state;
-  }
-}
+// const todos = (state = [], action) => {
+//   switch (action.type) {
+//     case C.ADD_TODO:
+//       return [...state, {text:action.text, _id:action.id, completed:action.completed,completedAt:action.completedAt}];
+//     case C.FETCH_TODOS:
+//       return [...action.todos];
+//     case C.DELETE_TODO:
+//       return state.filter((todo) => {
+//         return todo._id !== action.id;
+//       });
+//     case C.COMPLETE_TODO:
+//       return state.map((todo) => {
+//         return (todo._id === action.id)
+//           ? {...todo, completed: !todo.completed, completedAt:action.completedAt}
+//           :todo
+//       })
+//     case C.REMOVE_TODOS:
+//       return [];
+//     default:
+//       return state;
+//   }
+// }
 
-const todo = (state="",action) => {
-  switch (action.type) {
-    case C.FETCH_TODO:
-      return action.todo;
-    default:
-      return state;
-  }
-}
+// const todo = (state="",action) => {
+//   switch (action.type) {
+//     case C.FETCH_TODO:
+//       return action.todo;
+//     default:
+//       return state;
+//   }
+// }
 
-const user = (state="",action) => {
-  const {email,id} = action;
-  switch(action.type) {
-    case C.ADD_USER_DATA:
-      return {email,id}
-    case C.REMOVE_USER_DATA:
-      return "";
-    default:
-      return state;
-  }
-}
+// const user = (state="",action) => {
+//   const {email,id} = action;
+//   switch(action.type) {
+//     case C.ADD_USER_DATA:
+//       return {email,id}
+//     case C.REMOVE_USER_DATA:
+//       return "";
+//     default:
+//       return state;
+//   }
+// }
 
 const auth = (state=false,action) => {
   switch (action.type) {
@@ -104,7 +104,7 @@ const rootReducer = combineReducers({
   // todos,
   // todo,
   // user,
-  // auth,
+  auth,
   counter
 });
 

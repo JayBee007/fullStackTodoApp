@@ -6,9 +6,9 @@ import Container from '../components/Container/Container';
 import {addCounterAction} from '../redux/actions';
 
 class Home extends Component {
-  // handleOnPress = () => {
-  //   this.props.navigator.push({screen:'Login', title:'Login'})
-  // }
+  handleOnPress = () => {
+    this.props.navigator.push({screen:'Login', title:'Login'})
+  }
 
 
   render() {
@@ -25,6 +25,7 @@ class Home extends Component {
             {0} - {this.props.counter}
           </Text>
           <Button title='Get Started' onPress={this.props.addCounterAction} />
+          <Button title='Login' onPress={this.handleOnPress} />
         </View>
       </Container>
     );

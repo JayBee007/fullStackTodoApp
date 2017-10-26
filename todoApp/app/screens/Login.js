@@ -7,7 +7,7 @@ class Login extends Component {
     return (
       <Container>
         <Text style={{color:'white'}}>
-          Login Form
+          Login Form - {this.props.auth.toString()}
         </Text>
       </Container>
     );
